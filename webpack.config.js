@@ -20,9 +20,13 @@ const filename = ext => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`;
 const jsLoaders = () => {
   const loaders = [
     {
-      loader: 'babel-loader',   // использовать лоадер babel с опцией
+      loader: 'babel-loader',
       options: {
-        presets: ['@babel/preset-env']
+        presets:
+          ['@babel/preset-env',
+            {
+              'plugins': ['@babel/plugin-proposal-class-properties']
+            }]
       }
     }
   ];
@@ -95,7 +99,20 @@ module.exports = {
       {
         test: /\.m?js$/, // регулярка для определения типов файлов
         exclude: /node_modules/, // исключить папку
-        use: jsLoaders(),
+        // use: jsLoaders()
+        use: [
+          // 'eslint-loader',
+          {
+            loader: 'babel-loader',
+            options: {
+              presets:
+                ['@babel/preset-env',
+                  {
+                    'plugins': ['@babel/plugin-proposal-class-properties']
+                  }]
+            }
+          }
+        ]
       },
     ],
   },
