@@ -72,10 +72,10 @@
     bottom: 0;
     background-color: $primary-color;
     opacity: 0;
+    z-index: 10;
 
     &:hover {
-      opacity: 1;
-      cursor: col-resize;
+      opacity: 1 !important;
     }
   }
 
